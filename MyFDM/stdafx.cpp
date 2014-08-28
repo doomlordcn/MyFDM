@@ -5,4 +5,5 @@
 
 #include "stdafx.h"
 
-
+CToolBarEx _TBMgr;
+CSkinMgr _SkinMgr;

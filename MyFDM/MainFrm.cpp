@@ -57,13 +57,27 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//	TRACE0("未能创建工具栏\n");
 	//	return -1;      // 未能创建
 	//}
-
-	if (!m_wndStatusBar.Create(this))
-	{
-		TRACE0("未能创建状态栏\n");
-		return -1;      // 未能创建
+	if (FALSE == _TBMgr.Create(this)){
+		TRACE0("未能创建工具栏\n");
+		return -1;
 	}
-	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
+	CBitmap bmp, bmpd;
+	bmp.Attach(SBMP(IDB_TOOL0));
+	bmpd.Attach(SBMP(IDB_TOOL0_D));
+
+	wgTButtonInfo btns[] = {
+		wgTButtonInfo(0, TBSTYLE_SEP, _T("")),
+		wgTButtonInfo(ID_TUM_LIGHT, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo(ID_TUM_MEDIUM, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo(ID_TUM_HEAVY, TBSTYLE_BUTTON, _T(""))
+
+	};
+	//if (!m_wndStatusBar.Create(this))
+	//{
+	//	TRACE0("未能创建状态栏\n");
+	//	return -1;      // 未能创建
+	//}
+	//m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
 
 	// TODO: 如果不需要可停靠工具栏，则删除这三行
 	//m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);

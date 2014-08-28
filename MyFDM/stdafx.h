@@ -22,7 +22,7 @@
 
 #include <afxwin.h>         // MFC 核心组件和标准组件
 #include <afxext.h>         // MFC 扩展
-
+#include "resource.h"
 
 #include <afxdisp.h>        // MFC 自动化类
 
@@ -41,9 +41,10 @@
 #define _TB_SIZE_X 32
 #define _TB_SIZE_Y 32
 #define _TB_USE_ALPHA TRUE
-
-
-
+#include "ToolBarEx.h"
+#include "SkinMgr.h"
+extern CToolBarEx _TBMgr;
+extern CSkinMgr _SkinMgr;
 
 #ifdef _UNICODE
 #if defined _M_IX86
