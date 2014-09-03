@@ -4,7 +4,7 @@
 
 #pragma once
 #include "ChildView.h"
-
+//#include "Wnd_FDMGetCustVer_Btn.h"
 class CMainFrame : public CFrameWnd
 {
 	
@@ -36,7 +36,8 @@ protected:  // 控件条嵌入成员
 	CToolBar          m_wndToolBar;
 	CStatusBar        m_wndStatusBar;
 	CChildView    m_wndView;
-
+	CReBar m_wndReBar;
+	//CWnd_FDMGetCustVer_Btn m_wndFDMCustBtn;
 // 生成的消息映射函数
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);

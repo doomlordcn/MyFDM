@@ -6,7 +6,7 @@
 #include "MyFDM.h"
 
 #include "MainFrm.h"
-
+#include "mfchelp.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -22,10 +22,9 @@ END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // 状态行指示器
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+	ID_SEPARATOR,           
+	ID_SB_TRAFFIC_THISMONTH,
+	ID_SB_TOTALSPEED,
 };
 
 // CMainFrame 构造/析构
@@ -44,7 +43,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	//// 创建一个视图以占用框架的工作区
+	// 创建一个视图以占用框架的工作区
 	//if (!m_wndView.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW, CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
 	//{
 	//	TRACE0("未能创建视图窗口\n");
@@ -64,26 +63,66 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CBitmap bmp, bmpd;
 	bmp.Attach(SBMP(IDB_TOOL0));
 	bmpd.Attach(SBMP(IDB_TOOL0_D));
-
-	wgTButtonInfo btns[] = {
-		wgTButtonInfo(0, TBSTYLE_SEP, _T("")),
-		wgTButtonInfo(ID_TUM_LIGHT, TBSTYLE_BUTTON, _T("")),
-		wgTButtonInfo(ID_TUM_MEDIUM, TBSTYLE_BUTTON, _T("")),
-		wgTButtonInfo(ID_TUM_HEAVY, TBSTYLE_BUTTON, _T(""))
+	if (_TB_USE_ALPHA)
+	{
+		ConvertBmp32WithAlphaToBmp32WithoutAlpha (bmp, GetSysColor (COLOR_3DFACE));
+		ConvertBmp32WithAlphaToBmp32WithoutAlpha (bmpd, GetSysColor (COLOR_3DFACE));
+	}
+	wgTButtonInfo btns [] = 
+	{
+		wgTButtonInfo (0, TBSTYLE_SEP, _T("")),
+		wgTButtonInfo (ID_TUM_LIGHT, TBSTYLE_BUTTON,_T("")),
+		wgTButtonInfo (ID_TUM_MEDIUM, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (ID_TUM_HEAVY, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (0, TBSTYLE_SEP, _T("")),
+		wgTButtonInfo (ID_STARTALL, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (ID_STOPALL, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (ID_PAUSEALLDLDS, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (0, TBSTYLE_SEP,_T("")),
+		wgTButtonInfo (ID_DLDROPTIONS, TBSTYLE_BUTTON,_T("")),
+		wgTButtonInfo (ID_DIAL, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (ID_HELP, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (ID_APP_ABOUT, TBSTYLE_BUTTON, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
+		wgTButtonInfo (0, 0, _T("")),
 
 	};
-	//if (!m_wndStatusBar.Create(this))
-	//{
-	//	TRACE0("未能创建状态栏\n");
-	//	return -1;      // 未能创建
-	//}
-	//m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
+	if (FALSE == _TBMgr.InsertGroup (btns, &bmp, &bmpd, sizeof (btns) / sizeof (wgTButtonInfo)))
+		return -1;
+		_TBMgr.ShowGroup (0, 0);
+	if (!m_wndStatusBar.Create(this))
+	{
+		TRACE0("未能创建状态栏\n");
+		return -1;      // 未能创建
+	}
+	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
+
+	UINT nID, nStyle;
+	int cx;
+
+	m_wndStatusBar.GetPaneInfo (0, nID, nStyle, cx);
+	nStyle &= ~ SBPS_NOBORDERS;
+	m_wndStatusBar.SetPaneInfo (0, nID, nStyle, cx);
+
+	m_wndReBar.Create(this);
+	m_wndReBar.AddBar (&_TBMgr, NULL, NULL, RBBS_FIXEDBMP|RBBS_NOGRIPPER|RBBS_BREAK);
 
 	// TODO: 如果不需要可停靠工具栏，则删除这三行
 	//m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 	//EnableDocking(CBRS_ALIGN_ANY);
 	//DockControlBar(&m_wndToolBar);
-
+	if (!m_wndView.Create(AfxRegisterWndClass (0, LoadCursor (NULL, IDC_ARROW),
+		(HBRUSH) (COLOR_3DFACE+1), NULL), NULL, AFX_WS_DEFAULT_VIEW | WS_CHILD,
+		CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
+	{
+		TRACE0("Failed to create view window\n");
+		return -1;
+	}
 
 	return 0;
 }

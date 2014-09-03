@@ -1,8 +1,7 @@
 
 // ChildView.h : CChildView 类的接口
 //
-
-
+#include "ClientAreaWnd.h"
 #pragma once
 
 
@@ -10,6 +9,7 @@
 
 class CChildView : public CWnd
 {
+	friend class CMainFrame;
 // 构造
 public:
 	CChildView();
@@ -30,7 +30,10 @@ public:
 
 	// 生成的消息映射函数
 protected:
+	CClientAreaWnd m_wndClient;
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 };
 

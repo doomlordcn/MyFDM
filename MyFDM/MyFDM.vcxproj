@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -96,7 +96,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="res\bitmap1.bmp" />
     <None Include="Res\fdm.ico" />
+    <None Include="res\fdm_getcver_btn.bmp" />
     <None Include="res\hand.cur" />
     <None Include="res\MyFDM.ico" />
     <None Include="res\MyFDM.rc2" />
@@ -106,9 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="ClientAreaWnd.h" />
     <ClInclude Include="fsMutex.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="mfchelp.h" />
     <ClInclude Include="MyFDM.h" />
     <ClInclude Include="plugins.h" />
     <ClInclude Include="Resource.h" />
@@ -121,8 +125,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="ClientAreaWnd.cpp" />
     <ClCompile Include="fsMutex.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="mfchelp.cpp" />
     <ClCompile Include="MyFDM.cpp" />
     <ClCompile Include="SkinMgr.cpp" />
     <ClCompile Include="stdafx.cpp">
