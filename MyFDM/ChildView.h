@@ -30,10 +30,13 @@ public:
 
 	// 生成的消息映射函数
 protected:
+	void ApplySize(int cx, int cy);
 	CClientAreaWnd m_wndClient;
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
 };
 

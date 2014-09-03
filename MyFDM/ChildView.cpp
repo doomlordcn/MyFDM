@@ -25,6 +25,8 @@ CChildView::~CChildView()
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_WM_CREATE()
+	ON_WM_SIZE()
+	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
 
@@ -67,4 +69,29 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (FALSE == m_wndClient.Create (this))
 		return -1;
 	return 0;
+}
+
+
+void CChildView::OnSize(UINT nType, int cx, int cy)
+{
+	CWnd::OnSize(nType, cx, cy);
+
+	// TODO:  在此处添加消息处理程序代码
+	ApplySize(cx, cy);
+}
+
+void CChildView::ApplySize(int cx, int cy)
+{
+	int cyAdd = 0;
+
+	m_wndClient.MoveWindow(0, 3 + cyAdd, cx, cy - (3 + cyAdd), TRUE);
+}
+
+
+void CChildView::OnSetFocus(CWnd* pOldWnd)
+{
+	CWnd::OnSetFocus(pOldWnd);
+
+	// TODO:  在此处添加消息处理程序代码
+	m_wndClient.SetFocus();
 }

@@ -20,6 +20,8 @@ CClientAreaWnd::~CClientAreaWnd()
 
 BEGIN_MESSAGE_MAP(CClientAreaWnd, CWnd)
 	ON_WM_CREATE()
+	ON_WM_SIZE()
+	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
 BOOL CClientAreaWnd::Create(CWnd *pParent)
@@ -46,6 +48,28 @@ int CClientAreaWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	// TODO:  在此添加您专用的创建代码
-
+	if (FALSE == m_plugs2.Create(this))
+		return -1;
 	return 0;
+}
+
+
+void CClientAreaWnd::OnSize(UINT nType, int cx, int cy)
+{
+	CWnd::OnSize(nType, cx, cy);
+
+	// TODO:  在此处添加消息处理程序代码
+	if (cx == 0 || cy == 0)
+		return;
+
+	m_plugs2.MoveWindow(0, 0, cx, cy);
+}
+
+
+void CClientAreaWnd::OnSetFocus(CWnd* pOldWnd)
+{
+	CWnd::OnSetFocus(pOldWnd);
+
+	// TODO:  在此处添加消息处理程序代码
+	m_plugs2.SetFocus();
 }

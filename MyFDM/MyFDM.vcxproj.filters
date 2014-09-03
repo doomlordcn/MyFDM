@@ -90,6 +90,12 @@
     <ClInclude Include="ClientAreaWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PluginFrame2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PlugFrame2Tabs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyFDM.cpp">
@@ -123,6 +129,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ClientAreaWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PluginFrame2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PlugFrame2Tabs.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

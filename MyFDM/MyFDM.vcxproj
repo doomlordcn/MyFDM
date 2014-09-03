@@ -114,6 +114,8 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="mfchelp.h" />
     <ClInclude Include="MyFDM.h" />
+    <ClInclude Include="PlugFrame2Tabs.h" />
+    <ClInclude Include="PluginFrame2.h" />
     <ClInclude Include="plugins.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SkinMgr.h" />
@@ -130,6 +132,8 @@
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="mfchelp.cpp" />
     <ClCompile Include="MyFDM.cpp" />
+    <ClCompile Include="PlugFrame2Tabs.cpp" />
+    <ClCompile Include="PluginFrame2.cpp" />
     <ClCompile Include="SkinMgr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
